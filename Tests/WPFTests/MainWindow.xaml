@@ -6,34 +6,49 @@
         xmlns:local="clr-namespace:WPFTests"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Отправить" HorizontalAlignment="Left" Height="55" Margin="325,194,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Click="OnSendButtonClick">
-            <Button.Resources>
-                <ResourceDictionary>
-                  <ResourceDictionary.MergedDictionaries>
-                      <ResourceDictionary Source="Theme.xaml"/>
-                  </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </Button.Resources>
-        </Button>
-        <TextBox Name="LoginEdit" HorizontalAlignment="Left" Height="20" Margin="140,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" RenderTransformOrigin="0.5,0.5">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.015" x:Name="Rotator"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-            <TextBox.Effect>
-                <DropShadowEffect/>
-            </TextBox.Effect>
-        </TextBox>
-        <PasswordBox Name="PasswordEdit" HorizontalAlignment="Left" Height="20" Margin="485,129,0,0" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.5,0.5">
-        </PasswordBox>
-        <TextBlock HorizontalAlignment="Left" Margin="175,84,0,0" Text="Имя пользователя" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Label Content="Пароль" HorizontalAlignment="Left" Margin="485,79,0,0" VerticalAlignment="Top"/>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
+        </ResourceDictionary>
+    </Window.Resources>
 
-    </Grid>
+    <TabControl BorderBrush="#FFF3F2F2">
+        <TabItem Header="Данные" Foreground="#FF1903F7">
+            <Grid Height="330" Width="485">
+
+                <TextBox Name="LoginEdit" HorizontalAlignment="Left"
+                 Height="20" Margin="134,13,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="245" RenderTransformOrigin="0.5,0.5"/>
+
+                <PasswordBox Name="PasswordEdit" HorizontalAlignment="Left"
+                     Height="20" Margin="134,51,0,0" 
+                     VerticalAlignment="Top" Width="245"
+                     RenderTransformOrigin="0.5,0.5"/>
+
+                <Label Content="Имя пользователя" HorizontalAlignment="Left" 
+               Margin="10,10,0,0" VerticalAlignment="Top" 
+               Height="26" Width="124" Grid.ColumnSpan="2"/>
+                <Label Content="Пароль" Margin="11,48,0,0" VerticalAlignment="Top" 
+               HorizontalAlignment="Left" Height="26" Width="51"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Содержание" Foreground="#FF1A03FF">
+            <Grid Height="330" Width="485">
+                <Label Content="Заголовок письма" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
+                <Label Content="Текс письма" HorizontalAlignment="Left" Margin="11,116,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="subject" HorizontalAlignment="Left" 
+                 Height="20" Margin="134,85,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="245"/>
+                <TextBox x:Name="mailText" HorizontalAlignment="Left"
+                 Height="58" Margin="134,122,0,0"
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="244"/>
+                <Button Content="Отправить" HorizontalAlignment="Left" Height="55" Margin="188,233,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.5,0.5" Click="OnSendButtonClick"/>
+            </Grid>
+        </TabItem>
+
+    </TabControl>
 </Window>
