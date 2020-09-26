@@ -65,8 +65,8 @@
                                     ToolTip="Удалить"/>
                         </ToolBar>
                     <ToolBar Header="Перейти в планировщик" Band="0">
-                            <Button fa:Awesome.Content="Solid_Plane" Foreground="DarkViolet">Перейти</Button>
-                    </ToolBar>
+                            <Button fa:Awesome.Content="Solid_Plane" Foreground="DarkViolet"/>
+                        </ToolBar>
                     <ToolBar Header="Получатели" Band="1">
                             <Button ToolTip="Добавить">
                                 <fa:ImageAwesome Icon="Solid_PlusCircle" Height="12" Foreground="Green"/>
