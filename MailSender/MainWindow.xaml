@@ -193,6 +193,7 @@
                             </ListBoxItem>
                         </ListBox>
                     </GroupBox>
+                    <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="3" Background="Transparent" ShowsPreview="True"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Письма"></TabItem>
