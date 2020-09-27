@@ -6,9 +6,9 @@ namespace MailSender.Models
 {
     class Server
     {
-        public string Adress { get; set; }
+        public string Address { get; set; }
 
-        private int _Port;
+        private int _Port = 587;
         public int Port 
         { 
             get => _Port;
@@ -24,5 +24,10 @@ namespace MailSender.Models
         public string Password { get; set; }
         public string Description { get; set; }
         public bool UseSSL { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Address}:{Port}"; 
+        }
     }
 }
