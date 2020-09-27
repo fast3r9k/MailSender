@@ -39,7 +39,7 @@
             <DockPanel>
                 <ToolBarTray DockPanel.Dock="Top">
                     <ToolBar Header="Сервера" Band="0">
-                            <ComboBox Margin="20,0,0,0" MaxWidth="220" MinWidth="100" SelectedIndex="1"
+                            <ComboBox Name="ServerList" Margin="20,0,0,0" MaxWidth="220" MinWidth="100" SelectedIndex="1"
                                       ItemsSource="{x:Static data:TestData.Servers}"
                                       DisplayMemberPath="Address">
                             </ComboBox>
@@ -52,7 +52,7 @@
                                     ToolTip="Удалить"/>
                         </ToolBar>
                     <ToolBar Header="Отправители" Band="1">
-                            <ComboBox MaxWidth="220" MinWidth="100" SelectedIndex="1"
+                            <ComboBox Name="SendersList" MaxWidth="220" MinWidth="100" SelectedIndex="1"
                                       ItemsSource="{x:Static data:TestData.Senders}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate DataType="m:Sender">
@@ -84,7 +84,7 @@
                         </ToolBar>
                 </ToolBarTray>
                 <GroupBox Header="Список получателей">
-                    <DataGrid ItemsSource="{x:Static data:TestData.Recipients}" AutoGenerateColumns="False"
+                    <DataGrid Name="RecipientsList" ItemsSource="{x:Static data:TestData.Recipients}" AutoGenerateColumns="False"
                               GridLinesVisibility="Vertical"
                               AlternatingRowBackground="LightGray"
                               VerticalGridLinesBrush="Black">
@@ -114,7 +114,7 @@
                             <TextBlock TextAlignment="Center">Календарь</TextBlock>
                             <Calendar/>
                             <StackPanel>
-                                <Button Content="Отправить"/>
+                                <Button Content="Отправить" Click="OnSenButtonClick"/>
                                 <Button Content="Запланировать"/>
                             </StackPanel>
                         </StackPanel>

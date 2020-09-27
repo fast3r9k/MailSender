@@ -1,4 +1,5 @@
-﻿using MailSender.Models;
+﻿using MailSender.lib.Service;
+using MailSender.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,14 @@ namespace MailSender.Data
            {
                Address = $"smtp.server{i}.com",
                Login = $"Login-{i}",
-               Password = $"Password-{i}",
+               Password = TextEncoder.Encode($"Password={i}"),
                UseSSL = i % 2 == 0
            })
            .ToList();
         public static List<Message> Messages{ get; } = Enumerable.Range(1, 10)
             .Select(i => new Message
             {
-                Subject = $"Сообщение{i}",
+                Subject = "Сообщение{i}",
                 Body = $"Текст сообщения{i}"
             })
             .ToList();
