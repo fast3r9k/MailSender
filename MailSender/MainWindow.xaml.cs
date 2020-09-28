@@ -34,7 +34,12 @@ namespace MailSender
             if (sender is null) return;
             if (!(RecipientsList.SelectedItem is Recipient recipient)) return;
             if (!(ServerList.SelectedItem is Server server)) return;
-            if (!(MessagesList.SelectedItem is Message message)) return;
+            if (!(MessagesList.SelectedItem is Message message))
+            {
+                MessageBox.Show("Вы пытаетесь отправить пустое письмо", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                myTab.SelectedIndex = 2;
+                return;
+            }
 
             var send_service = new MailSenderService
             {
@@ -49,10 +54,15 @@ namespace MailSender
             {
                 send_service.SendMessage(sender.Address, recipient.Address, message.Subject, message.Body);
             }
-            catch(SmtpException ex)
+            catch (SmtpException ex)
             {
-                MessageBox.Show("Возникла ошибка при отправке " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Возникла ошибка при отправке" + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ScheduleClick(object sender, RoutedEventArgs e)
+        {
+            myTab.SelectedIndex = 1;
         }
     }
 }
