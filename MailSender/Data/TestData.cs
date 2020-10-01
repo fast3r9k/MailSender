@@ -34,14 +34,13 @@ namespace MailSender.Data
                UseSSL = i % 2 == 0
            })
            .ToList();
-        public static List<Message> Messages{ get; } = Enumerable.Range(1, 10)
-            .Select(i => new Message
-            {
-                Subject = "Сообщение{i}",
-                Body = $"Текст сообщения{i}"
-            })
-            .ToList();
-
+        public static List<Message> Messages { get; } = Enumerable.Range(1, 20)
+                  .Select(i => new Message
+                  {
+                      Subject = $"Сообщение {i}",
+                      Body = $"Текст сообщения {i}"
+                  })
+                  .ToList();
 
     }
 }

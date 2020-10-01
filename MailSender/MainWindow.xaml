@@ -6,14 +6,11 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:data="clr-namespace:MailSender.Data"
         xmlns:m="clr-namespace:MailSender.Models"
-        xmlns:vm="clr-namespace:MailSender.ViewModels"
         xmlns:local="clr-namespace:MailSender"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" 
-        Title="{Binding Title}" 
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+        Title="{Binding Title}"
         Height="450" Width="800">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <Menu.Resources>
@@ -60,7 +57,8 @@
                     <ToolBarTray DockPanel.Dock="Top">
                         <ToolBar Header="Сервера" Band="0">
                             <ComboBox Name="ServerList" Margin="20,0,0,0" MaxWidth="220" MinWidth="100" SelectedIndex="1"
-                                      ItemsSource="{x:Static data:TestData.Servers}"
+                                      ItemsSource="{Binding Servers}"
+                                      SelectedItem="{Binding SelectedServer}"
                                       DisplayMemberPath="Address">
                             </ComboBox>
                             <Button ToolTip="Добавить">
@@ -73,7 +71,8 @@
                         </ToolBar>
                         <ToolBar Header="Отправители" Band="1">
                             <ComboBox Name="SendersList" MaxWidth="220" MinWidth="100" SelectedIndex="1"
-                                      ItemsSource="{x:Static data:TestData.Senders}">
+                                      ItemsSource="{Binding Senders}"
+                                       SelectedItem="{Binding SelectedServer}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate DataType="m:Sender">
                                         <StackPanel Orientation="Horizontal">
@@ -91,7 +90,8 @@
                                     ToolTip="Удалить"/>
                         </ToolBar>
                         <ToolBar Header="Перейти в планировщик" Band="0">
-                            <Button fa:Awesome.Content="Solid_Plane" Foreground="DarkViolet" Click="ScheduleClick"/>
+                            <Button fa:Awesome.Content="Solid_Plane" Foreground="DarkViolet"/>
+                            <!--Click="ScheduleClick"--> 
                         </ToolBar>
                         <ToolBar Header="Получатели" Band="1">
                             <Button ToolTip="Добавить">
@@ -104,7 +104,10 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Header="Список получателей">
-                        <DataGrid Name="RecipientsList" ItemsSource="{x:Static data:TestData.Recipients}" AutoGenerateColumns="False"
+                        <DataGrid Name="RecipientsList" 
+                                  ItemsSource="{Binding Recipients}"
+                                  SelectedItem="{Binding SelectedRecipient}"
+                                  AutoGenerateColumns="False"
                               GridLinesVisibility="Vertical"
                               AlternatingRowBackground="LightGray"
                               VerticalGridLinesBrush="Black">
@@ -134,7 +137,8 @@
                             <TextBlock TextAlignment="Center">Календарь</TextBlock>
                             <Calendar/>
                             <StackPanel>
-                                <Button  Click="OnSenButtonClick" >
+                                <Button>
+                                    <!--Click="OnSenButtonClick"-->
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock>Отправить</TextBlock>
                                         <Image Source="Media/Send.jpg" Height="15" Margin="5,0,0,0"/>
@@ -250,7 +254,10 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <GroupBox Grid.Column="0" Header="Список писем">
-                        <ListBox Name="MessagesList" ItemsSource="{x:Static data:TestData.Messages}" DisplayMemberPath="Subject"/>
+                        <ListBox Name="MessagesList" 
+                                 ItemsSource="{Binding Messages}" 
+                                 SelectedItem="{Binding SelectedMessage}"
+                                 DisplayMemberPath="Subject"/>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="Редактор">
                         <DockPanel>

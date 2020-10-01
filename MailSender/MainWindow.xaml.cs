@@ -28,41 +28,42 @@ namespace MailSender
             InitializeComponent();
         }
 
-        private void OnSenButtonClick(object Sender, RoutedEventArgs e)
-        {
-            var sender = SendersList.SelectedItem as Sender;
-            if (sender is null) return;
-            if (!(RecipientsList.SelectedItem is Recipient recipient)) return;
-            if (!(ServerList.SelectedItem is Server server)) return;
-            if (!(MessagesList.SelectedItem is Message message))
-            {
-                MessageBox.Show("Вы пытаетесь отправить пустое письмо", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                myTab.SelectedIndex = 2;
-                return;
-            }
 
-            var send_service = new MailSenderService
-            {
-                ServerAddress = server.Address,
-                ServerPort = server.Port,
-                UseSSL = server.UseSSL,
-                Login = server.Login,
-                Password = server.Password,
-            };
+        //private void OnSenButtonClick(object Sender, RoutedEventArgs e)
+        //{
+        //    var sender = SendersList.SelectedItem as Sender;
+        //    if (sender is null) return;
+        //    if (!(RecipientsList.SelectedItem is Recipient recipient)) return;
+        //    if (!(ServerList.SelectedItem is Server server)) return;
+        //    if (!(MessagesList.SelectedItem is Message message))
+        //    {
+        //        MessageBox.Show("Вы пытаетесь отправить пустое письмо", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        myTab.SelectedIndex = 2;
+        //        return;
+        //    }
 
-            try
-            {
-                send_service.SendMessage(sender.Address, recipient.Address, message.Subject, message.Body);
-            }
-            catch (SmtpException ex)
-            {
-                MessageBox.Show("Возникла ошибка при отправке " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+        //    var send_service = new MailSenderService
+        //    {
+        //        ServerAddress = server.Address,
+        //        ServerPort = server.Port,
+        //        UseSSL = server.UseSSL,
+        //        Login = server.Login,
+        //        Password = server.Password,
+        //    };
 
-        private void ScheduleClick(object sender, RoutedEventArgs e)
-        {
-            myTab.SelectedIndex = 1;
-        }
+        //    try
+        //    {
+        //        send_service.SendMessage(sender.Address, recipient.Address, message.Subject, message.Body);
+        //    }
+        //    catch (SmtpException ex)
+        //    {
+        //        MessageBox.Show("Возникла ошибка при отправке " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
+
+        //private void ScheduleClick(object sender, RoutedEventArgs e)
+        //{
+        //    myTab.SelectedIndex = 1;
+        //}
     }
 }
