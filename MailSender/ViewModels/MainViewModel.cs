@@ -140,15 +140,15 @@ namespace MailSender.ViewModels
         {
             if (SelectedServer is null) return false;
             if (SelectedSender is null) return false;
-            if (SelectedMessage is null) return false;
             if (SelectedRecipient is null) return false;
+            if (SelectedMessage is null) return false;
             return true;
         }
         private void OnSendMailCommandExecuted(object p)
         {
-            var server = SelectedServer;   
-            var sender = SelectedSender;   
-            var recipient = SelectedRecipient;   
+            var server = SelectedServer;
+            var sender = SelectedSender;
+            var recipient = SelectedRecipient;
             var message = SelectedMessage;
             var mail_sender = _MailService.GetSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password);
             mail_sender.Send(sender.Address, recipient.Address, message.Subject, message.Body);

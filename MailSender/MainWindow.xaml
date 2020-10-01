@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:MailSender"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" 
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
-        Title="{Binding Title}"
+        Title="{Binding Title}" 
         Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -141,13 +141,7 @@
                             <TextBlock TextAlignment="Center">Календарь</TextBlock>
                             <Calendar/>
                             <StackPanel>
-                                <Button>
-                                    <!--Click="OnSenButtonClick"-->
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock>Отправить</TextBlock>
-                                        <Image Source="Media/Send.jpg" Height="15" Margin="5,0,0,0"/>
-                                    </StackPanel>
-                                </Button>
+                                <Button Content="Отправить" Command="{Binding SendMailCommand}"/>
                                 <Button Content="Запланировать"/>
                             </StackPanel>
                         </StackPanel>
