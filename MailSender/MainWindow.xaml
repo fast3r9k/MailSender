@@ -61,13 +61,17 @@
                                       SelectedItem="{Binding SelectedServer}"
                                       DisplayMemberPath="Address">
                             </ComboBox>
-                            <Button ToolTip="Добавить">
+                            <Button ToolTip="Добавить"
+                                    Command="{Binding CreateNewServerCommand}">
                                 <fa:ImageAwesome Icon="Solid_PlusCircle" Height="12" Foreground="Green"/>
                             </Button>
                             <Button fa:Awesome.Content="Solid_Edit" Foreground="DarkBlue"
-                                    ToolTip="Редактировать"/>
+                                    ToolTip="Редактировать"
+                                    Command="{Binding EditServerCommand}"
+                                    CommandParameter="{Binding SelectedServer}"/>
                             <Button fa:Awesome.Content="Solid_Trash" Foreground="Red"
-                                    ToolTip="Удалить"/>
+                                    ToolTip="Удалить"
+                                    Command="{Binding DeleteServerCommand}"/>
                         </ToolBar>
                         <ToolBar Header="Отправители" Band="1">
                             <ComboBox Name="SendersList" MaxWidth="220" MinWidth="100" SelectedIndex="1"

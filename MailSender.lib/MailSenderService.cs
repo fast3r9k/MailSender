@@ -13,11 +13,11 @@ namespace MailSender.lib
         public bool UseSSL { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public void SendMessage(string SenderAddress, string RecepientAddress, string Subject, string Body)
+        public void SendMessage(string SenderAddress, string RecipientAddress, string Subject, string Body)
         {
 
             var from = new MailAddress(SenderAddress);
-            var to = new MailAddress(RecepientAddress);
+            var to = new MailAddress(RecipientAddress);
             using (var message = new MailMessage(from,to))
             {
                 message.Subject = Subject;
