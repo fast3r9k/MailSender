@@ -76,7 +76,7 @@
                         <ToolBar Header="Отправители" Band="1">
                             <ComboBox Name="SendersList" MaxWidth="220" MinWidth="100" SelectedIndex="1"
                                       ItemsSource="{Binding Senders}"
-                                       SelectedItem="{Binding SelectedServer}">
+                                       SelectedItem="{Binding SelectedSender}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate DataType="m:Sender">
                                         <StackPanel Orientation="Horizontal">
