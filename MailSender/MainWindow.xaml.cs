@@ -56,7 +56,7 @@ namespace MailSender
             }
             catch (SmtpException ex)
             {
-                MessageBox.Show("Возникла ошибка при отправке" + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Возникла ошибка при отправке " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
