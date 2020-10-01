@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using MailSender.Data;
 using MailSender.Infrastructure.Commands;
+using MailSender.lib.Interfaces;
 using MailSender.Models;
 using MailSender.ViewModels.Base;
 
@@ -15,12 +16,8 @@ namespace MailSender.ViewModels
     class MainViewModel:ViewModel
     {
         private string _Title = "MailSender";
-        public string Title
-        {
-            get => _Title;
-            set => Set(ref _Title, value);
-        }
 
+        private IMailService _MailService;
         private ObservableCollection<Server> _Servers;
         private ObservableCollection<Sender> _Senders;
         private ObservableCollection<Recipient> _Recipients;
@@ -31,6 +28,12 @@ namespace MailSender.ViewModels
         private Recipient _SelectedRecipient;
 
         #region Свойства
+        public string Title
+        {
+            get => _Title;
+            set => Set(ref _Title, value);
+        }
+
         public ObservableCollection<Server> Servers
         {
             get => _Servers;
@@ -127,9 +130,35 @@ namespace MailSender.ViewModels
         }
         #endregion
 
-        #endregion
-        public MainViewModel()
+        #region SendMailCommand
+        private ICommand _SendMailCommand;
+
+        public ICommand SendMailCommand => _SendMailCommand
+            ??= new DelegateCommand(OnSendMailCommandExecuted, CanSendMailCommandExecute);
+
+        private bool CanSendMailCommandExecute(object p)
         {
+            if (SelectedServer is null) return false;
+            if (SelectedSender is null) return false;
+            if (SelectedMessage is null) return false;
+            if (SelectedRecipient is null) return false;
+            return true;
+        }
+        private void OnSendMailCommandExecuted(object p)
+        {
+            var server = SelectedServer;   
+            var sender = SelectedSender;   
+            var recipient = SelectedRecipient;   
+            var message = SelectedMessage;
+            var mail_sender = _MailService.GetSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password);
+            mail_sender.Send(sender.Address, recipient.Address, message.Subject, message.Body);
+        }
+        #endregion
+
+        #endregion
+        public MainViewModel(IMailService MailService)
+        {
+            _MailService = MailService;
             Servers = new ObservableCollection<Server>(TestData.Servers);
             Senders = new ObservableCollection<Sender>(TestData.Senders);
             Recipients = new ObservableCollection<Recipient>(TestData.Recipients);
