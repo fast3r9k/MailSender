@@ -37,24 +37,24 @@ namespace MailSender.lib.Service
         {
             var from = new MailAddress(SenderAddress);
             var to = new MailAddress(RecipientAddress);
-            using (var message = new MailMessage(from, to))
+            using var message = new MailMessage(from, to)
             {
-                message.Subject = Subject;
-                message.Body = Body;
+                Subject = Subject,
+                Body = Body
+            };
 
-                using (var client = new SmtpClient(_Address,_Port))
+            using (var client = new SmtpClient(_Address, _Port))
+            {
+                client.EnableSsl = _SSL;
+                client.Credentials = new NetworkCredential(_Login, _Password);
+                try
                 {
-                    client.EnableSsl = _SSL;
-                    client.Credentials = new NetworkCredential(_Login, _Password);
-                    try
-                    {
-                        client.Send(message);
-                    }
-                    catch (SmtpException ex)
-                    {
-                        Trace.TraceError(ex.ToString());
-                        throw;
-                    }
+                    client.Send(message); //NullException???
+                }
+                catch (SmtpException ex)
+                {
+                    Trace.TraceError(ex.ToString());
+                    throw;
                 }
             }
         }
