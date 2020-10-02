@@ -26,6 +26,7 @@ namespace MailSender.ViewModels
         private Message _SelectedMessage;
         private Sender _SelectedSender;
         private Recipient _SelectedRecipient;
+        public StatisticViewModel Statistic { get; } = new StatisticViewModel();
 
         #region Свойства
         public string Title
@@ -126,7 +127,6 @@ namespace MailSender.ViewModels
             if (server is null) return;
             Servers.Remove(server);
             SelectedServer = Servers.FirstOrDefault();
-            MessageBox.Show($"Delete server {server.Address }", "Управление серверами");
         }
         #endregion
 
@@ -152,6 +152,7 @@ namespace MailSender.ViewModels
             var message = SelectedMessage;
             var mail_sender = _MailService.GetSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password);
             mail_sender.Send(sender.Address, recipient.Address, message.Subject, message.Body);
+            Statistic.MessageSended();
         }
         #endregion
 
