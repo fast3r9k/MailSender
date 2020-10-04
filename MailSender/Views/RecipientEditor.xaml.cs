@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MailSender.lib.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -22,5 +23,15 @@ namespace MailSender.Views
         {
             InitializeComponent();
         }
+
+        private void OnDataValidationError(object sender, ValidationErrorEventArgs e)
+        {
+            var control = (Control)sender;
+            if (e.Action == ValidationErrorEventAction.Added)
+                control.ToolTip = e.Error.ErrorContent.ToString();
+            else
+                control.ClearValue(ToolTipProperty);
+        }
     }
 }
+ 
