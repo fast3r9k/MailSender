@@ -99,7 +99,7 @@
                         </ToolBar>
                         <ToolBar Header="Перейти в планировщик" Band="0">
                             <Button fa:Awesome.Content="Solid_Plane" Foreground="DarkViolet"/>
-                            <!--Click="ScheduleClick"--> 
+                            <!--Click="ScheduleClick"-->
                         </ToolBar>
                         <ToolBar Header="Получатели" Band="1">
                             <Button ToolTip="Добавить">
@@ -111,9 +111,14 @@
                                     ToolTip="Удалить"/>
                         </ToolBar>
                     </ToolBarTray>
-                    <GroupBox Header="Список получателей">
-                        <v:RecipientsView/>
-                    </GroupBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <v:RecipientsView Grid.Column="0"/>
+                        <v:RecipientEditor Grid.Column="1"/>
+                    </Grid>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Планировщик" TabIndex="1">
