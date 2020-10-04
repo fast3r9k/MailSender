@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace MailSender.Models
+namespace MailSender.lib.Models
 {
-    class Server
+    public class Server
     {
         public string Address { get; set; }
 

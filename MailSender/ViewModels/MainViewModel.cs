@@ -8,7 +8,7 @@ using System.Windows.Input;
 using MailSender.Data;
 using MailSender.Infrastructure.Commands;
 using MailSender.lib.Interfaces;
-using MailSender.Models;
+using MailSender.lib.Models;
 using MailSender.ViewModels.Base;
 
 namespace MailSender.ViewModels
