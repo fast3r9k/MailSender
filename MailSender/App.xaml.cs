@@ -31,6 +31,7 @@ namespace MailSender
 #else
             services.AddTransient<IMailService, SmtpMailService>();
 #endif
+            services.AddSingleton<IEncryptorService, RfcEncryptor>();
         }
     }
 }

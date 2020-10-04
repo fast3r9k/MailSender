@@ -3413,7 +3413,7 @@
                             </Border.OpacityMask>
                             <Border BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
                                 <Border.BorderBrush>
-                                    <SolidColorBrush Color="{DynamicResource MainColor}" />
+                                    <SolidColorBrush  Color="{DynamicResource MainColor}" />
                                 </Border.BorderBrush>
                                 <Border BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
                                     <Border.BorderBrush>

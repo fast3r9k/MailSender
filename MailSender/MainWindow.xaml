@@ -8,6 +8,7 @@
         xmlns:m="clr-namespace:MailSender.Models"
         xmlns:local="clr-namespace:MailSender"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" 
+        xmlns:v="clr-namespace:MailSender.Views"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Title="{Binding Title}" 
         Height="450" Width="800">
@@ -111,19 +112,7 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Header="Список получателей">
-                        <DataGrid Name="RecipientsList" 
-                                  ItemsSource="{Binding Recipients}"
-                                  SelectedItem="{Binding SelectedRecipient}"
-                                  AutoGenerateColumns="False"
-                              GridLinesVisibility="Vertical"
-                              AlternatingRowBackground="LightGray"
-                              VerticalGridLinesBrush="Black">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Id" MinWidth="30"/>
-                                <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Адрес" MinWidth="180" Binding="{Binding Address}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <v:RecipientsView/>
                     </GroupBox>
                 </DockPanel>
             </TabItem>

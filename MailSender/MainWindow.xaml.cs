@@ -28,6 +28,11 @@ namespace MailSender
             InitializeComponent();
         }
 
+        private void RecipientsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
         //private void OnSenButtonClick(object Sender, RoutedEventArgs e)
         //{
