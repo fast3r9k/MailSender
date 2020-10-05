@@ -14,7 +14,7 @@
             <GradientStop Color="#FFC6D6EC" Offset="0.13"/>
         </LinearGradientBrush>
     </UserControl.Background>
-    <Grid Margin="10">
+    <Grid Margin="10" Validation.Error="OnDataValidationError">
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -39,7 +39,7 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Name:"/>
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Address:"/>
         <TextBox Grid.Column="1" Grid.Row="0" 
-                 Validation.Error="OnDataValidationError"
+                 
                  Text="{Binding SelectedRecipient.Id, NotifyOnValidationError=True}"/>
         <TextBox Grid.Column="1" Grid.Row="1" 
                  Text="{Binding SelectedRecipient.Name, NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}"/>

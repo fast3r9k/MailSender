@@ -10,6 +10,11 @@ namespace MailSender.lib.Service
 {
     public class SmtpMailService : IMailService
     {
+        public SmtpMailService()
+        {
+
+        }
+
         public IMailSender GetSender(string Server, int Port, bool SSL, string Login, string Password)
         {
             return new SmtpMailSender(Server, Port, SSL, Login, Password);
@@ -37,24 +42,31 @@ namespace MailSender.lib.Service
         {
             var from = new MailAddress(SenderAddress);
             var to = new MailAddress(RecipientAddress);
-            using var message = new MailMessage(from, to)
+            using (var message = new MailMessage(from, to))
             {
-                Subject = Subject,
-                Body = Body
-            };
 
-            using (var client = new SmtpClient(_Address, _Port))
-            {
-                client.EnableSsl = _SSL;
-                client.Credentials = new NetworkCredential(_Login, _Password);
-                try
+                message.Subject = Subject;
+                message.Body = Body;
+
+                using (var client = new SmtpClient(_Address, _Port))
                 {
-                    client.Send(message); //NullException???
-                }
-                catch (SmtpException ex)
-                {
-                    Trace.TraceError(ex.ToString());
-                    throw;
+                    client.EnableSsl = _SSL;
+
+                    client.Credentials = new NetworkCredential
+                    {
+                        UserName = _Login,
+                        Password = _Password
+                    };
+
+                    try
+                    {
+                        client.Send(message);
+                    }
+                    catch (Exception e)
+                    {
+                        Trace.TraceError(e.ToString());
+                        throw;
+                    }
                 }
             }
         }
