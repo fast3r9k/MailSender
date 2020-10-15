@@ -66,7 +66,16 @@ namespace ConsoleTests
                     await db.SaveChangesAsync();
                 }
             }
-            Console.WriteLine("Главный поток работу закончил");
+
+            using (var db = new StudentsDb(new DbContextOptionsBuilder<StudentsDb>().UseSqlServer(connection_str).Options))
+            {
+                var students = await db.Students
+                    .Include(s => s.Group)
+                    .Where(s => s.Group.Name == "Группа 5").ToArrayAsync();
+                foreach (var student in students)
+                    Console.WriteLine($"[{student.Id}] {student.Name} {student.Group.Name}");
+            }
+                Console.WriteLine("Главный поток работу закончил");
             Console.ReadLine();
         }
     }
