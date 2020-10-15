@@ -7,6 +7,10 @@ using MailSender.lib.Interfaces;
 using MailSender.lib.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using MailSender.Data;
+using MailSender.lib.Models;
+using MailSender.Data.Stores.InMemory;
 
 namespace MailSender
 {
@@ -19,7 +23,10 @@ namespace MailSender
 
         public static IHost Hosting => _Hosting
             ??= Host.CreateDefaultBuilder(Environment.GetCommandLineArgs())
-
+               .ConfigureHostConfiguration(cfg => cfg
+                   .AddJsonFile("appconfig.json", true, true)
+                   .AddXmlFile("appsettings.xml", true, true)
+                )
                .ConfigureAppConfiguration(cfg => cfg
                    .AddJsonFile("appconfig.json", true, true)
                    .AddXmlFile("appsettings.xml", true, true)
@@ -43,6 +50,20 @@ namespace MailSender
             services.AddTransient<IMailService, SmtpMailService>();
 #endif
             services.AddSingleton<IEncryptorService, RfcEncryptor>();
+
+            services.AddDbContext<MailSenderDB>(opt => opt.UseSqlServer(host.Configuration
+                .GetConnectionString("Default")));
+
+            services.AddTransient<MailSenderDbInitialiser>();
+
+            services.AddSingleton<IStore<Recipient>, RecipientsStoreInMemory>();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            
+            Services.GetRequiredService<MailSenderDbInitialiser>().Initialise();
+            base.OnStartup(e);
         }
     }
 }

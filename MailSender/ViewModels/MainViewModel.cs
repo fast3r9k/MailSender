@@ -10,6 +10,7 @@ using MailSender.Infrastructure.Commands;
 using MailSender.lib.Interfaces;
 using MailSender.lib.Models;
 using MailSender.ViewModels.Base;
+using Microsoft.Extensions.Configuration;
 
 namespace MailSender.ViewModels
 {
@@ -18,6 +19,7 @@ namespace MailSender.ViewModels
         private string _Title = "MailSender";
 
         private IMailService _MailService;
+        private IStore<Recipient> _RecipientsStore;
         private ObservableCollection<Server> _Servers;
         private ObservableCollection<Sender> _Senders;
         private ObservableCollection<Recipient> _Recipients;
@@ -157,13 +159,14 @@ namespace MailSender.ViewModels
         #endregion
 
         #endregion
-        public MainViewModel(IMailService MailService)
+        public MainViewModel(IMailService MailService, IStore<Recipient> RecipientsStore)
         {
             _MailService = MailService;
+            _RecipientsStore = RecipientsStore;
             Servers = new ObservableCollection<Server>(TestData.Servers);
             Senders = new ObservableCollection<Sender>(TestData.Senders);
-            Recipients = new ObservableCollection<Recipient>(TestData.Recipients);
-            Messages = new ObservableCollection<Message>(TestData.Messages);
+            Recipients = new ObservableCollection<Recipient>(RecipientsStore.GetAll());
+            Messages = new ObservableCollection<Message>(TestData.Messages);            
         }
     }
 }
