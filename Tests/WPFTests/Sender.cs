@@ -8,39 +8,30 @@ namespace WPFTests
 {
     public static class Sender
     {
-        static MailAddress from = new MailAddress("faster20092009@yandex.ru", "Никита");
-        static MailAddress to = new MailAddress("faster20092009@gmail.com", "Никита");
-        static MailMessage message = new MailMessage(from, to)
-        {
-            Subject = "Заголовок письма от " + DateTime.Now,
-            Body = "Текст тестового письма " + DateTime.Now
-        };
-        public static MailAddress From
-        {
-            get {return from; }            
-        }
-        public static MailAddress To
-        {
-            get { return to; }
-        }
 
-        public static MailMessage Message
-        {
-            get { return message; }
-        }
+            public static int port = 587;
 
-        static string host = "smtp.yandex.ru";
-        static int port = 587;
+            public static string host = "smtp.yandex.ru";
 
-        public static string Host
-        {
-            get { return host; }
-        }
-        public static int Port
-        {
-            get { return port; }
-        }
+            public static string from_address = "faster20092009@yandex.ru";
 
-    
+            public static string from_name = "Никита";
+
+            public static string to_address = "faster20092009@gmail.com";
+
+            public static string to_name = "Nikita";
+
+            public static string subject = "Тестовое письмо от " + DateTime.Now;
+
+            //public static string user_name = UserNameEditor.Text;
+            //public static securestring password = PasswordEditor.SecurePassword;
+
+
+            public static string msg = "Привет, это тестовое письмо, отвечать на него вовсе не обязательно!) ";
+
+            public static string okMessage = "Письмо успешно отправлена";
+
+            public static string errorSubject = "Ошибка!";
+
     }
 }
