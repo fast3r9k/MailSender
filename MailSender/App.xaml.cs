@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using MailSender.Data;
 using MailSender.lib.Models;
 using MailSender.Data.Stores.InMemory;
+using MailSender.Data.Stores.InDB;
 
 namespace MailSender
 {
@@ -56,7 +57,11 @@ namespace MailSender
 
             services.AddTransient<MailSenderDbInitialiser>();
 
-            services.AddSingleton<IStore<Recipient>, RecipientsStoreInMemory>();
+            services.AddSingleton<IStore<Recipient>, RecipientsStoreInDB>();
+            services.AddSingleton<IStore<Sender>, SendersStoreInDB>();
+            services.AddSingleton<IStore<Server>, ServersStoreInDB>();
+            services.AddSingleton<IStore<Message>, MessagesStoreInDB>();
+            services.AddSingleton<IStore<SchedulerTask>, SchedulerTasksStoreInDB>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
