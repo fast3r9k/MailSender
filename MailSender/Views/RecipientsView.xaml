@@ -36,7 +36,7 @@
                   VerticalGridLinesBrush="#FF8AAEDA"
                   IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" MinWidth="30"/>
+                <DataGridTextColumn Header="ID" MinWidth="30" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Адрес" MinWidth="180" Binding="{Binding Address}"/>
             </DataGrid.Columns>
