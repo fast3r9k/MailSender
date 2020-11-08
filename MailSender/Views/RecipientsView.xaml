@@ -5,7 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MailSender.Views"
              mc:Ignorable="d" 
+             xmlns:i ="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800" Foreground="Black">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFB4C9E5" Offset="0"/>
@@ -24,7 +30,7 @@
             <TextBox/>
         </DockPanel>
         <UniformGrid DockPanel.Dock="Bottom" HorizontalAlignment="Center" Rows="1" Margin="0,2,0,0">
-            <Button Content="Загрузка данных" Margin="5,0" Padding="10,5"/>
+            <Button Content="Загрузка данных" Margin="5,0" Padding="10,5"  Command="{Binding LoadDataCommand}"/>
             <Button  Content="Сохранение данных" Margin="5,0" Padding="10,5"/>
         </UniformGrid>
         <DataGrid Name="RecipientsList" 
