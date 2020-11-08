@@ -10,7 +10,7 @@ namespace MailSender.Data
     {
         public MailSenderDB CreateDbContext(string[] args)
         {
-            const string connection_string = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MailSenderDb;Integrated Security=True;";
+            const string connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;";
             var optionsBuilder = new DbContextOptionsBuilder<MailSenderDB>();            
             optionsBuilder.UseSqlServer(connection_string);
             return new MailSenderDB(optionsBuilder.Options);

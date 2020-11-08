@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MailSender.lib.Models.Base
 {
@@ -10,6 +8,7 @@ namespace MailSender.lib.Models.Base
     }
     public abstract class NamedEntity : Entity
     {
+        [Required]
         public virtual string Name { get; set; }
     }
 
